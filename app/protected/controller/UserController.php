@@ -12,8 +12,10 @@ class UserController extends LibController{
 
     }
 
-    public function signUp(){
-        
+    public function register(){
+        $userRoleObj=new UserRoleModel();
+        $userRoleArray=$userRoleObj->getAll();
+        $this->render('Registration',array("userRoleArray"=>$userRoleArray));
     }
 
     public function login(){
