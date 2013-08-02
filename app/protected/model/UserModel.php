@@ -82,4 +82,74 @@ class UserModel extends LibModel{
                 return false;
         }
     }
+
+    public function doForgotPassword($data){
+        $rules=array('email_id'=>array('require','email'));
+        $loginValidate=new LibValidation($data,$rules);
+
+        $returnArray=array();
+        if(!$loginValidate->validate()){
+            $data_to_render=array('error_field'=>$loginValidate->error_field,'validation_errors'=>$loginValidate->validation_errors);
+            $returnArray['status']='Error';
+            $returnArray['array']=$data_to_render;
+        }
+        else{
+            $conditionArray=array('email_id','=',$data['email_id']);
+            $userData=$this->findByCondition($conditionArray);
+            if(count($userData)===1){
+                $returnArray['status']='Success';
+                $returnArray['array']=array('userData'=>$userData);
+            }
+            else{
+                return false;
+            }
+        }
+        return $returnArray;
+    }
+
+    public function checkActivationCode($activation_code){
+        $conditionArray=array('activation_code','=',$activation_code);
+        $userData=$this->findByCondition($conditionArray);
+        if(count($userData)===1)
+            return true;
+        else
+            return false;
+    }
+
+    public function doChangePassword($data){
+        $rules=array('txtNewPassword'=>array('require'),'txtConfirmPassword'=>array('require'),'activationCode'=>array('require'));
+        $loginValidate=new LibValidation($data,$rules);
+
+        $returnArray=array();
+        if(!$loginValidate->validate()){
+            $data_to_render=array('error_field'=>$loginValidate->error_field,'validation_errors'=>$loginValidate->validation_errors);
+            $returnArray['status']='Error';
+            $returnArray['array']=$data_to_render;
+        }
+        else{
+            $conditionArray=array('activation_code','=',$data['activationCode']);
+            $userData=$this->findByCondition($conditionArray);
+            if(count($userData)===1){
+                if($data['txtNewPassword']===$data['txtConfirmPassword']){
+                    $AccPassword=$data['txtNewPassword'];
+                    $AccPassword .= $userData[0]['random_no'];
+                    $AccPassword=md5($AccPassword);
+                    $data['txtNewPassword']=$AccPassword;
+
+                    $this->updateData(array('password'=>$data['txtNewPassword']),array('id','=',$userData[0]['id']));
+                    $returnArray['status']='Success';
+                    $returnArray['array']=array();
+                }
+                else{
+                    $returnArray['status']='Error';
+                    $returnArray['array']=array('error_field'=>array('Password'),'validation_errors'=>array('Password'=>array('New password and confirm password not match')));
+                }
+            }
+            else{
+                $returnArray['status']='Error';
+                $returnArray['array']=array('error_field'=>array('Link'),'validation_errors'=>array('Link'=>array('Invalid link')));
+            }
+        }
+        return $returnArray;
+    }
 }

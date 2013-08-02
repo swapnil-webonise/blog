@@ -21,12 +21,12 @@
     </style>
 </head>
 <body>
-    <a href="#" class="menu">Home</a>
+    <a href="/" class="menu">Home</a>
     <?php
         Application::session()->start();
         if(Application::session()->read('userId')!==null){
     ?>
-        <a href="/user/loginForm" class="menu">Logout (<?php echo ucfirst(Application::session()->read('userName')); ?>)</a>
+        <a href="/user/doLogout" class="menu">Logout (<?php echo ucfirst(Application::session()->read('userName')); ?>)</a>
     <?php
         }
         else{

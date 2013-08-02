@@ -60,14 +60,78 @@ class UserController extends LibController{
         }
     }
 
+    public function doLogout(){
+        Application::session()->destroy();
+        $this->redirect('/');
+    }
+
     public function activate(){
         $activation_code=$_GET['activation_code'];
 
         $userObj=new UserModel();
-        $userObj->doActivate($activation_code);
+        $status=$userObj->doActivate($activation_code);
+        if($status===true){
+            $this->render('ActivationDone');
+        }
+        else{
+            echo "Activation not done";
+        }
     }
 
     public function forgotPassword(){
+        $this->render('ForgotPassword');
+    }
 
+    public function doForgotPassword(){
+        $data=array('email_id'=>$_POST['txtEmailId']);
+
+        $userObj=new UserModel();
+        $returnArray=$userObj->doForgotPassword($data);
+
+        if($returnArray['status']==='Success'){
+            $to      = $returnArray['array']['userData'][0]['email_id'];
+            $subject = 'Forgot Password';
+            $message = 'http://assignments.webonise.com/user/changePassword?activation_code='.$returnArray['array']['userData'][0]['activation_code'];
+            $headers = 'From: swapnilpatil2606@weboniselab.com' . "\r\n" .
+                'Reply-To: swapnilpatil2606@weboniselab.com' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+
+            mail($to, $subject, $message, $headers);
+
+            echo "Check Email Id";
+        }
+        elseif($returnArray['status']==='Error'){
+            $this->render('/ForgotPasswordError',$returnArray['array']);
+        }
+        else{
+            $this->render('/ForgotPasswordError',array('error_field'=>array('email_id'),'validation_errors'=>array('email_id'=>array('Email id does not exist'))));
+        }
+    }
+
+    public function changePassword(){
+        $activation_code=$_GET['activation_code'];
+
+        $userObj=new UserModel();
+        $status=$userObj->checkActivationCode($activation_code);
+        if($status===true){
+            $this->render('ChangePassword');
+        }
+        else{
+            echo "Wrong link";
+        }
+    }
+
+    public function doChangePassword(){
+        $data=array('txtNewPassword'=>$_POST['txtNewPassword'],'txtConfirmPassword'=>$_POST['txtConfirmPassword'],'activationCode'=>$_POST['activationCode']);
+
+        $userObj=new UserModel();
+        $returnArray=$userObj->doChangePassword($data);
+
+        if($returnArray['status']==='Success'){
+            $this->render('/ChangePasswordDone');
+        }
+        elseif($returnArray['status']==='Error'){
+            $this->render('/ChangePasswordError',$returnArray['array']);
+        }
     }
 }
