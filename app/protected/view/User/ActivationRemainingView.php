@@ -1,0 +1,12 @@
+<html>
+<head>
+    <title>Activation Remaining</title>
+    <link rel="stylesheet" type="text/css" href="../../global/css/bootstrap.css">
+</head>
+<body>
+<h3>Registration done successfully!!!</h3>
+Please Verify Your Email ID<br>
+We have send a activation link on following Email Id<br>
+<?php echo $this->userData[0]['email_id']; ?>
+</body>
+</html>

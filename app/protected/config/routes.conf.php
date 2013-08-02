@@ -28,4 +28,3 @@
 
 $route[]=array('method'=>'get','path'=>'/','action'=>'Blog~index');
 $route[]=array('method'=>'get','path'=>'/error','action'=>'Error~error');
-

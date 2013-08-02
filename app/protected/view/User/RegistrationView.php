@@ -1,10 +1,11 @@
 <html>
     <head>
         <title>User Registration</title>
+        <link rel="stylesheet" type="text/css" href="../../global/css/bootstrap.css">
     </head>
     <body>
     <h3>Registration Form</h3>
-    <form action="/user/register" name="registerForm" method="post">
+    <form action="/user/doRegister" name="registerForm" method="post">
         <table>
             <tr>
                 <td><label>First Name:</label></td>
@@ -21,7 +22,7 @@
             <tr>
                 <td><label>Email ID:</label></td>
                 <td>
-                    <input type="text" name="txtEmailId" value="<?php if(isset($_GET['txtEmailId']))  echo $_GET['txtEmailId'];?>">
+                    <input type="text" name="txtEmailId">
                 </td>
             </tr>
             <tr>
@@ -30,18 +31,23 @@
                     <input type="password" name="txtPassword" >
                 </td>
             </tr>
-
             <tr>
                 <td><label>User Role:</label></td>
                 <td>
                     <select name="comboUserRole">
-                        <option>Select</option>
+                        <option value="">Select</option>
                         <?php
                         foreach ($this->userRoleArray as $role) {
-                                echo '<option value="'.$role['user_role'].'" >'.$role['user_role'].'</option>';
+                                echo '<option value="'.$role['id'].'" >'.$role['user_role'].'</option>';
                         }
                         ?>
                     </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Gender:</label></td>
+                <td>
+                    <input type="radio" name="gender" value="Male" checked="checked">&nbsp;Male&nbsp;&nbsp;&nbsp;<input type="radio" name="gender" value="Female" >&nbsp;Female
                 </td>
             </tr>
             <tr>
