@@ -7,23 +7,11 @@
     <link rel="stylesheet" type="text/css" href="../../global/css/bootstrap.css">
 </head>
 <body>
-    <a href="/" class="menu">Home</a>
-    <?php
-        Application::session()->start();
-        if(Application::session()->read('userId')!==null){
-    ?>
-        <a href="/user/doLogout" class="menu">Logout (<?php echo ucfirst(Application::session()->read('userName')); ?>)</a>
-    <?php
-        }
-        else{
-    ?>
-        <a href="/user/loginForm" class="menu">Login</a>
-        <a href="/user/registerForm" class="menu">Register</a>
-    <?php
-        } ?>
-
+<a href="/home">Home</a>
+<a href="/user/loginForm">Login</a>
+<a href="/user/registerForm">Register</a>
+Filter by title:
 <form action="/Blog/filter" method="post">
-    Filter by title:
     <input type="text" name='title'>
     <input type="submit" name="submit" value="search">
 </form>

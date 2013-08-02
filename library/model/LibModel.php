@@ -116,7 +116,7 @@ class LibModel {
     }
     private function getFields(){
         $db=LibDatabase::getDbInstance();
-        $rows=$db->fireQuery('SHOW COLUMNS FROM user');
+        $rows=$db->fireQuery('SHOW COLUMNS FROM '.$this->tableName);
         $fields=array();
         foreach($rows as $row){
             $fields[]=$row['Field'];
