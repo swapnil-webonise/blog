@@ -16,4 +16,10 @@ class CommentModel extends LibModel{
         $this->user_id=Application::session()->read('userId');
         $this->save();
     }
+    public function getCommentOfBlog($blog_id){
+        $userId=Application::session()->read('userId');
+        $comments=$this->findByCondition(array(array('blog_id','=',$blog_id),'and',array(array('isApprove','=','Yes'),'or',array('user_id','=',$userId))));
+        return $comments;
+    }
+
 }

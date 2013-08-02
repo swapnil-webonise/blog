@@ -8,6 +8,10 @@
  */
 class BlogController extends LibController{
     public function index(){
+        $this->render('index');
+    }
+    public function home(){
+
         $blog=new BlogModel();
         $blogs=$blog->getAll();
         $this->render('Home',array('blogs'=>$blogs));
@@ -34,10 +38,11 @@ class BlogController extends LibController{
         $userId=Application::session()->read('userId');
         $userRole=Application::session()->read('userRole');
         $blog=new BlogModel();
-        $comment=new CommentModel();
+        $user=new UserModel();
         if(isset($_GET['id'])){
             $blogs=$blog->findByCondition(array('id','=',$_GET['id']));
-            $comments=$comment->findByCondition(array(array('blog_id','=',$_GET['id']),'and',array(array('isApprove','=','Yes'),'or',array('user_id','=',$userId))));
+            $queryString="select c.comment,c.isApprove,u.first_name,u.last_name from comment c,user u where c.user_id=u.id and c.blog_id=".$_GET['id'];
+            $comments=$blog->query($queryString);
             $this->render('Specific',array('blogs'=>$blogs,'comments'=>$comments,'userId'=>$userId,'userRole'=>$userRole));
         }
     }

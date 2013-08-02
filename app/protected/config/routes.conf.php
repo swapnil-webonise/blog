@@ -25,8 +25,8 @@
  * The variable can be accessible in method by respective global array means If method type is get then $_GET and If method type is post then $_POST
  * action should be controller_name~method_name
  */
-
 $route[]=array('method'=>'get','path'=>'/','action'=>'Blog~index');
+$route[]=array('method'=>'get','path'=>'/home','action'=>'Blog~home');
 $route[]=array('method'=>'get','path'=>'/error','action'=>'Error~error');
 $route[]=array('method'=>'get','path'=>'/specific/[id]','action'=>'Blog~specific');
 $route[]=array('method'=>'get','path'=>'/blog/new','action'=>'Blog~newBlog');

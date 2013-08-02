@@ -7,9 +7,9 @@
     <link rel="stylesheet" type="text/css" href="../../global/css/bootstrap.css">
 </head>
 <body>
-<a href="#">Home</a>
-<a href="#">Login</a>
-<a href="#">Register</a>
+<a href="/home">Home</a>
+<a href="/user/loginForm">Login</a>
+<a href="/user/registerForm">Register</a>
 
     <?php
     foreach($this->blogs as $blog){
@@ -20,13 +20,20 @@
                 <tr><td colspan=2 align='center'>Comments:
                         <table border="1" style="width: 500px;">
                             <?php foreach($this->comments as $comment){?>
-                            <tr><td><?php echo $comment['comment']?></td><td>is Approved:<?php echo $comment['isApprove']?></td></tr>
+                            <tr>
+                                <td><?php echo $comment['first_name'].' '.$comment['last_name'].' Says : '.$comment['comment']?></td>
+                                <td>is Approved:<?php echo $comment['isApprove'];
+                                    if($this->userRole===1){?>
+                                    <a href='/comment/approve/'.$comment['id']>Approve</a></td>
+                                    <?php } ?>
+                            </tr>
                             <?php } ?>
                             <tr><td><form action="/Comment/add" method="post">
                                         <input type="text" name='comment'>
                                         <input type='hidden' name='blog_id' value='<?php echo $blog['id'];?>'>
                                         <input type="submit" name="submit" value="comment">
-                                    </form></td></tr>
+                                    </form></td>
+                            </tr>
                         </table>
                 </td></tr>
             </table>
