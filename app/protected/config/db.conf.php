@@ -20,7 +20,7 @@
  */
 
 if($config['APP_MODE']=='dev'){
-    $dbconfig = array('HOST'=>'localhost', 'DATABASE'=>'blog_system', 'USER'=>'root', 'PASSWORD'=>'root', 'DB_DRIVER'=>'mysql',  'PERSISTENT_CONNECTION'=>true);
+    $dbconfig = array('HOST'=>'localhost', 'DATABASE'=>'blog_system', 'USER'=>'root', 'PASSWORD'=>'webonise6186', 'DB_DRIVER'=>'mysql',  'PERSISTENT_CONNECTION'=>true);
 }
 else if($config['APP_MODE']=='prod'){
     $dbconfig = array('HOST'=>'localhost', 'DATABASE'=>'database', 'USER'=>'root', 'PASSWORD'=>'1234', 'DB_DRIVER'=>'mysql',  'PERSISTENT_CONNECTION'=>true);

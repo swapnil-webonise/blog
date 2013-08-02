@@ -28,3 +28,5 @@
 
 $route[]=array('method'=>'get','path'=>'/','action'=>'Blog~index');
 $route[]=array('method'=>'get','path'=>'/error','action'=>'Error~error');
+$route[]=array('method'=>'get','path'=>'/specific/[id]','action'=>'Blog~specific');
+$route[]=array('method'=>'get','path'=>'/blog/new','action'=>'Blog~newBlog');
