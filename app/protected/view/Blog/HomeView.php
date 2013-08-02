@@ -5,6 +5,20 @@
         Blog System
     </title>
     <link rel="stylesheet" type="text/css" href="../../global/css/bootstrap.css">
+    <style>
+        a:link {color:blue;}      /* unvisited link */
+        a:visited {color:navy;}  /* visited link */
+        a:hover {color:#FF00FF;}  /* mouse over link */
+        a:active {color:#0000FF;}
+        .menu
+        {
+            padding: 5px 10px;
+            text-decoration: none;
+            background-color: #d2d2d2;
+            border:1px solid #666;
+            margin: 2px;
+        }
+    </style>
 </head>
 <body>
     <a href="/" class="menu">Home</a>
@@ -21,12 +35,12 @@
         <a href="/user/registerForm" class="menu">Register</a>
     <?php
         } ?>
-
-<form action="/Blog/filter" method="post">
-    Filter by title:
-    <input type="text" name='title'>
-    <input type="submit" name="submit" value="search">
-</form>
+<br><br>
+    <form action="/Blog/filter" method="post">
+        Filter by title:
+        <input type="text" name='title'>
+        <input type="submit" name="submit" value="search">
+    </form>
 <table border="1" class='table'>
     <?php
     foreach($this->blogs as $blog){
