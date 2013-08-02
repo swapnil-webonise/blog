@@ -50,9 +50,7 @@ class UserController extends LibController{
         $userObj=new UserModel();
         $returnArray=$userObj->doLogin($data);
         if($returnArray===true){
-            echo Application::session()->read('userId');
-            echo Application::session()->read('userName');
-            echo Application::session()->read('userRole');
+            $this->redirect('/');
         }
         elseif($returnArray===false){
             echo 'remaining';
@@ -67,5 +65,9 @@ class UserController extends LibController{
 
         $userObj=new UserModel();
         $userObj->doActivate($activation_code);
+    }
+
+    public function forgotPassword(){
+
     }
 }

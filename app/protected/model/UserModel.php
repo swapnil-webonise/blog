@@ -58,7 +58,6 @@ class UserModel extends LibModel{
             $conditionArray=array('email_id','=',$data['email_id']);
             $userData=$this->findByCondition($conditionArray);
             if($userData[0]['isActivated']==='Yes'){
-                Application::session()->destroy();
                 Application::session()->start();
                 Application::session()->write('userId',$userData[0]['id']);
                 Application::session()->write('userName',$userData[0]['first_name'].' '.$userData[0]['last_name']);

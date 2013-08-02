@@ -23,6 +23,10 @@
             <td></td>
             <td><input type="submit" name="submit" value="Login"></td>
         </tr>
+        <tr>
+            <td></td>
+            <td><a href="/user/forgotPassword">Forgot password ?</a></td>
+        </tr>
     </table>
 </form>
 </body>
