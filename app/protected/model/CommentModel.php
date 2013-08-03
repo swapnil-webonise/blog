@@ -31,5 +31,11 @@ class CommentModel extends LibModel{
         }
         return false;
     }
+    public function getBlogId($id){
+        $condition=array('id','=',$id);
+        $data=array('blog_id');
+        $blog_id=$this->findByCondition($condition,$data);
+        return $blog_id[0]['blog_id'];
+    }
 
 }

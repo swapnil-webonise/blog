@@ -17,6 +17,7 @@
     </script>
 </head>
 <body>
+<?php $this->useTemplate('head')?>
 <form method="post" action='/Blog/createBlog'>
 <table>
     <tr><th>Title : </th> <td> <input type='TEXT' name='title'> </td></tr>

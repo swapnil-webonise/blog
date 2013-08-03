@@ -25,6 +25,7 @@ class BlogController extends LibController{
         $blog->user_id=Application::session()->read('userId');
         $blog->encode();
         $blog->save();
+        $this->home();
     }
     public function filter(){
         $blog=new BlogModel();

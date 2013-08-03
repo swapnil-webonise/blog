@@ -19,7 +19,8 @@ class CommentController extends LibController{
         $comment->isApprove='Yes';
         $comment->id=$_GET['id'];
         $comment->save();
-        $this->redirect('/specific/1');
+        $blog_id=$comment->getBlogId($_GET['id']);
+        $this->redirect('/specific/'.$blog_id);
     }
     public function edit(){
         $comment=new CommentModel();

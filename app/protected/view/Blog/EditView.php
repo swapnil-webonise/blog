@@ -17,6 +17,7 @@
     </script>
 </head>
 <body>
+<?php $this->useTemplate('head')?>
 <form method="post" action='/Blog/editBlog'>
     <table>
         <tr><th>id : </th> <td> <input type='hidden' name='id' value=<?php echo $this->blogs[0]['id']?>> </td></tr>

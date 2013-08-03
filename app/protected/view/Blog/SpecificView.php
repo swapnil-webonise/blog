@@ -7,9 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../../global/css/bootstrap.css">
 </head>
 <body>
-<a href="/home">Home</a>
-<a href="/user/loginForm">Login</a>
-<a href="/user/registerForm">Register</a>
+<?php $this->useTemplate('head')?>
 
     <?php
     Application::session()->start();
@@ -21,14 +19,18 @@
     }
     foreach($this->blogs as $blog){
     ?>
-        Owner:<?php echo $this->user[0]['first_name'].' '.$this->user[0]['last_name']?>
+        <br> Owner:<?php echo $this->user[0]['first_name'].' '.$this->user[0]['last_name']?>
         <table border="1" style="width: 500px;">
-            <tr><td><?php echo $this->user[0]['first_name'].' '.$this->user[0]['last_name']?></td></tr>
                 <?php  if($userRole==1 ){?>
-                <tr><td colspan="2">Status:Not Approved</td>
+                <tr>
                     <?php if($blog['isApprove']=='No'){ ?>
+                    <td colspan="2">Status:Not Approved</td>
                     <td><a href=<?php echo '/blog/approve/'.$blog['id'];?>>Approve</a></td>
-                        <?php }?>
+                        <?php }
+                               else {
+                    ?>
+                    <td colspan="2">Status:Approved</td>
+                               <?php }?>
                     <td><a href=<?php echo '/blog/edit/'.$blog['id'];?>>edit</a></td>
                     <td><a href=<?php echo '/blog/delete/'.$blog['id']; ?>>delete</a></td>
                 </tr>

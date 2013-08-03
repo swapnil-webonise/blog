@@ -18,6 +18,11 @@ class LibModel {
      * primary key also can be specify by developer, otherwise it will be 'id'
      */
     private $primaryKey;
+    /*
+     * schema of table
+     */
+    private $fields;
+
     public function __construct($table_name=null,$primary_key=null){
         if(!empty($table_name)){
             $this->tableName=$table_name;
@@ -33,7 +38,7 @@ class LibModel {
             $this->primaryKey='id';
         }
         //-------------------------------------------------------------------
-
+        $this->fields=$this->getFields();
 
     }
 
@@ -41,17 +46,30 @@ class LibModel {
         $this->{$key}=$value;
     }
 
-    public function insertData($data=null){
+    public function insertData($data){
         $db=LibDatabase::getDbInstance();
         if(!empty($data)){
+            foreach($data as $key=>$value){
+                if(!in_array($key,$this->fields)){
+                    return false;
+                }
+            }
             return($db->generateQuery('Insert',$this->tableName,$data,null));
         }
-
+        return false;
     }
 
     public function updateData($data,$condition=null){
         $db=LibDatabase::getDbInstance();
+        if(!empty($data)){
+            foreach($data as $key=>$value){
+                if(!in_array($key,$this->fields)){
+                    return false;
+                }
+            }
         return($db->generateQuery('Update',$this->tableName,$data,$condition));
+        }
+        return false;
     }
 
     public function deleteData($condition=null){
