@@ -24,4 +24,16 @@ class BlogModel extends LibModel{
         }
         return false;
     }
+    public function validate(){
+        $data=array('title'=>$this->title,'description'=>$this->description,);
+        $conditions=array('title'=>'require','description'=>'require');
+        $validation=new LibValidation($data,$conditions);
+        if($validation->validate()==true){
+            return true;
+        }
+        else{
+            $validation_error=array('error_field'=>$validation->error_field,'validation_errors'=>$validation->validation_errors);
+            return $validation_error;
+        }
+    }
 }
