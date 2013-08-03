@@ -196,4 +196,9 @@ class LibSession{
 
         }
     }
+
+    public function __destruct(){
+        $this->is_enable=false;
+        $this->session_id=null;
+    }
 }

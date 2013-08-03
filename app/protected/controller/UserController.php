@@ -56,7 +56,7 @@ class UserController extends LibController{
             echo 'remaining';
         }
         else{
-            print_r($returnArray);
+            $this->render('/LoginError',$returnArray);
         }
     }
 

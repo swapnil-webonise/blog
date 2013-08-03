@@ -2,29 +2,47 @@
 <head>
     <title>Change Password</title>
     <link rel="stylesheet" type="text/css" href="../../global/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../global/css/main.css">
 </head>
 <body>
-<h3>Change Password</h3>
-<form action="/user/doChangePassword" name="loginForm" method="post">
-    <table>
-        <tr>
-            <td><label>New Password:</label></td>
-            <td>
-                <input type="password" name="txtNewPassword" >
-            </td>
-        </tr>
-        <tr>
-            <td><label>Confirmed Password:</label></td>
-            <td>
-                <input type="password" name="txtConfirmPassword" >
-                <input type="hidden" name="activationCode" value="<?php echo $_GET['activation_code']; ?>">
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" name="submit" value="Change Password"></td>
-        </tr>
-    </table>
-</form>
+    <br>
+    <a href="/" class="menu">Home</a>
+    <?php
+    Application::session()->start();
+    if(Application::session()->read('userId')!==null){
+        ?>
+    <a href="/user/doLogout" class="menu">Logout (<?php echo ucfirst(Application::session()->read('userName')); ?>)</a>
+        <?php
+    }
+    else{
+        ?>
+    <a href="/user/loginForm" class="menu">Login</a>
+    <a href="/user/registerForm" class="menu">Register</a>
+        <?php
+    }
+    ?>
+    <br><br>
+    <h3>Change Password</h3>
+    <form action="/user/doChangePassword" name="loginForm" method="post">
+        <table>
+            <tr>
+                <td><label>New Password:</label></td>
+                <td>
+                    <input type="password" name="txtNewPassword" >
+                </td>
+            </tr>
+            <tr>
+                <td><label>Confirmed Password:</label></td>
+                <td>
+                    <input type="password" name="txtConfirmPassword" >
+                    <input type="hidden" name="activationCode" value="<?php echo $_GET['activation_code']; ?>">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" name="submit" value="Change Password"></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
