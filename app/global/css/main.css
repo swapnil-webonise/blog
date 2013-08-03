@@ -2,22 +2,27 @@ a:link {color:blue;}      /* unvisited link */
 a:visited {color:navy;}  /* visited link */
 a:hover {color:#FF00FF;}  /* mouse over link */
 a:active {color:#0000FF;}
+body
+{
+    background-color: #FFFFFF;
+}
 .menu
 {
     padding: 5px 10px;
     text-decoration: none;
-    background-color: #d2d2d2;
+    background-color: #77CC11;
     border:1px solid #666;
     margin: 2px;
 }
 
 .blog
 {
-    background-color: #d9edf7;
+    background-color: #77CC11;
     width: 500px;
     box-shadow: 10px 10px 5px #888888;
     margin: 15px;
-    padding: 5px;
+    padding: 10px;
+    border-radius: 15px;
 }
 
 .readMore a

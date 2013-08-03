@@ -24,7 +24,6 @@
         <tr><th></th> <td> <input type='hidden' name='id' value=<?php echo $this->blogs[0]['id']?>> </td></tr>
         <tr><th>Title : </th> <td> <input type='TEXT' name='title' value=<?php echo $this->blogs[0]['title']?>> </td></tr>
         <tr><th>Description : </th><td> <textarea cols=25 rows=6 name='desc' id='desc'><?php echo $this->blogs[0]['description']?></textarea> </td></tr>
-        <tr><th>Tags : </th> <td> <input type='TEXT' name='tag'> </td></tr>
         <tr><td></td><td><input type="submit" name='submit' value="Edit"></td> </tr>
     </table>
 </form>
