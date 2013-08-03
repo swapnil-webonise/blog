@@ -12,7 +12,13 @@ class UserModel extends LibModel{
         return($this->findAll());
     }
     public function doRegister($data){
-        $rules=array('first_name'=>array('require'),'last_name'=>array('require'),'email_id'=>array('require','email'),'password'=>array('require','min:6','max:12','alphanumeric','special:!:$:@:%:^:&:'),'gender'=>array('require'),'profile_photo'=>array('require'),'user_role_id'=>array('require'));
+        $rules=array('first_name'=>array('require'),
+            'last_name'=>array('require'),
+            'email_id'=>array('require','email'),
+            'password'=>array('require','min:6','max:12','alphanumeric','special:!:$:@:%:^:&:'),
+            'gender'=>array('require'),
+            'profile_photo'=>array('require'),
+            'user_role_id'=>array('require'));
         $registerValidate=new LibValidation($data,$rules);
 
         $returnArray=array();

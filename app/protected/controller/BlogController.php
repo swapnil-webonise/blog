@@ -22,6 +22,7 @@ class BlogController extends LibController{
         $blog=new BlogModel();
         $blog->title=$_POST['title'];
         $blog->description=$_POST['desc'];
+        $blog->user_id=Application::session()->read('userId');
         $blog->encode();
         $blog->save();
     }
