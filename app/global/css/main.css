@@ -10,3 +10,18 @@ a:active {color:#0000FF;}
     border:1px solid #666;
     margin: 2px;
 }
+
+.blog
+{
+    background-color: #d9edf7;
+    width: 500px;
+    box-shadow: 10px 10px 5px #888888;
+    margin: 15px;
+    padding: 5px;
+}
+
+.readMore a
+{
+    text-decoration: none;
+    font-size: small;
+}

@@ -4,7 +4,7 @@
 Application::session()->start();
 if(Application::session()->read('userId')!==null){
     ?>
-    <a href="/blog/newBlog" class="menu">   new blog</a>
+    <a href="/blog/newBlog" class="menu">New Blog</a>
     <a href="/user/doLogout" class="menu">Logout (<?php echo ucfirst(Application::session()->read('userName')); ?>)</a>
 
 <?php

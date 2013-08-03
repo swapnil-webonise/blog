@@ -7,7 +7,6 @@
     <body>
     <br>
     <?php $this->useTemplate('head')?>
-    <br><br>
     <h3>Registration Form</h3>
     <form action="/user/doRegister" name="registerForm" method="post">
         <table>
