@@ -4,6 +4,7 @@
         new blog
     </title>
     <link rel="stylesheet" type="text/css" href="../../global/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../global/css/main.css">
     <script language="JavaScript" type="text/javascript" src="../../global/openwysiwyg_v1.4.7/scripts/wysiwyg.js"></script>
     <script language="javascript1.2">
         // attach the editor to all textareas of your page.
@@ -20,12 +21,11 @@
 <?php $this->useTemplate('head')?>
 <form method="post" action='/Blog/editBlog'>
     <table>
-        <tr><th>id : </th> <td> <input type='hidden' name='id' value=<?php echo $this->blogs[0]['id']?>> </td></tr>
+        <tr><th></th> <td> <input type='hidden' name='id' value=<?php echo $this->blogs[0]['id']?>> </td></tr>
         <tr><th>Title : </th> <td> <input type='TEXT' name='title' value=<?php echo $this->blogs[0]['title']?>> </td></tr>
-        <tr><th>Description : </th></tr>
-        <tr><th></th><td> <textarea cols=25 rows=6 name='desc' id='desc'><?php echo $this->blogs[0]['description']?></textarea> </td></tr>
-        <tr><th>tags : </th> <td> <input type='TEXT' name='tag'> </td></tr>
-        <tr><td colspan="2" align='center'><input type="submit" name='submit' value="Edit"></td> </tr>
+        <tr><th>Description : </th><td> <textarea cols=25 rows=6 name='desc' id='desc'><?php echo $this->blogs[0]['description']?></textarea> </td></tr>
+        <tr><th>Tags : </th> <td> <input type='TEXT' name='tag'> </td></tr>
+        <tr><td></td><td><input type="submit" name='submit' value="Edit"></td> </tr>
     </table>
 </form>
 </body>

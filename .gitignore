@@ -1,1 +1,2 @@
 .idea/*
+/app/protected/config/db.conf.php

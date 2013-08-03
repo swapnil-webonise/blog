@@ -5,8 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../../global/css/main.css">
 </head>
 <body>
-<?php $this->useTemplate('head')?>
-    <br><br>
+    <?php $this->useTemplate('head')?>
     <h3>User Login</h3>
     <form action="/user/doLogin" name="loginForm" method="post">
         <table>

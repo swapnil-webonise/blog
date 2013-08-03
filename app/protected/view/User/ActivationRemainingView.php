@@ -5,8 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../../global/css/main.css">
 </head>
 <body>
-<?php $this->useTemplate('head')?>
-    <br><br>
+    <?php $this->useTemplate('head')?>
     <h3>Registration done successfully!!!</h3>
     Please Verify Your Email ID<br>
     We have send a activation link on following Email Id<br>

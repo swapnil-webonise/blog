@@ -5,8 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../../global/css/main.css">
 </head>
 <body>
-<?php $this->useTemplate('head')?>
-    <br><br>
+    <?php $this->useTemplate('head')?>
     <h3>Forgot Password Form Errors</h3>
     <table border="1">
         <tr><th>Fields</th><th>Errors</th></tr>
