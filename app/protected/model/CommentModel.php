@@ -21,5 +21,15 @@ class CommentModel extends LibModel{
         $comments=$this->findByCondition(array(array('blog_id','=',$blog_id),'and',array(array('isApprove','=','Yes'),'or',array('user_id','=',$userId))));
         return $comments;
     }
+    public function delete($condition){
+        $data=$this->findByCondition($condition);
+        if(!empty($data)){
+            if($this->deleteData($condition)>0){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 
 }

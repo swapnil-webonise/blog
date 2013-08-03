@@ -14,4 +14,33 @@ class CommentController extends LibController{
         $goto='/specific/'.$_POST['blog_id'].'';
         $this->redirect($goto);
     }
+    public function approve(){
+        $comment=new CommentModel();
+        $comment->isApprove='Yes';
+        $comment->id=$_GET['id'];
+        $comment->save();
+        $this->redirect('/specific/1');
+    }
+    public function edit(){
+        $comment=new CommentModel();
+        $comment_to_edit=$comment->findByCondition(array('id','=',$_GET['id']));
+        $this->render('Edit',array('comment'=>$comment_to_edit));
+    }
+    public function editComment(){
+        $comment=new CommentModel();
+        $comment->id=$_POST['id'];
+        $comment->comment=$_POST['comment'];
+        $comment->save();
+        $goto='/specific/'.$_POST['blog_id'];
+        $this->redirect($goto);
+    }
+    public function delete(){
+        $comment=new CommentModel();
+        if($comment->delete(array('id','=',$_GET['id']))==true){
+            $this->redirect('/');
+        }
+        else{
+            throw new ApplicationException('Could not delete specified comment');
+        }
+    }
 }

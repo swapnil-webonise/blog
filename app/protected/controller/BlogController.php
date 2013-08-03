@@ -7,9 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 class BlogController extends LibController{
-    public function index(){
-        $this->render('home');
-    }
+
     public function home(){
 
         $blog=new BlogModel();
@@ -35,15 +33,46 @@ class BlogController extends LibController{
         }
     }
     public function specific(){
-        $userId=Application::session()->read('userId');
-        $userRole=Application::session()->read('userRole');
         $blog=new BlogModel();
-        $user=new UserModel();
+
         if(isset($_GET['id'])){
             $blogs=$blog->findByCondition(array('id','=',$_GET['id']));
-            $queryString="select c.comment,c.isApprove,u.first_name,u.last_name from comment c,user u where c.user_id=u.id and c.blog_id=".$_GET['id'];
+            $queryString="select u.first_name,u.last_name from user u,blog b where u.id=b.user_id and b.id=".$_GET['id'];
+            $user=$blog->query($queryString);
+            $queryString="select c.id,c.comment,c.isApprove,u.first_name,u.last_name from comment c,user u where c.user_id=u.id and c.blog_id=".$_GET['id'];
             $comments=$blog->query($queryString);
-            $this->render('Specific',array('blogs'=>$blogs,'comments'=>$comments,'userId'=>$userId,'userRole'=>$userRole));
+            $this->render('Specific',array('blogs'=>$blogs,'comments'=>$comments,'user'=>$user));
+        }
+    }
+    public function approve(){
+        $blog=new BlogModel();
+        $blog->id=$_GET['id'];
+        $blog->isApprove='Yes';
+        $blog->save();
+        $this->redirect('/specific/'.$_GET['id']);
+    }
+    public function edit(){
+        $blog=new BlogModel();
+        $blogs=$blog->findByCondition(array('id','=',$_GET['id']));
+        $this->render('Edit',array('blogs'=>$blogs));
+    }
+    public function editBlog(){
+        $blog=new BlogModel();
+        $blog->id=$_POST['id'];
+        $blog->title=$_POST['title'];
+        $blog->description=$_POST['desc'];
+        $blog->encode();
+        $blog->save();
+        $this->redirect('/specific/'.$_POST['id']);
+    }
+    public function delete(){
+        $blog=new BlogModel();
+        if($blog->delete(array('id','=',$_GET['id']))==true){
+            $blogs=$blog->getAll();
+            $this->render('Home',array('blogs'=>$blogs));
+        }
+        else{
+            throw new ApplicationException('Could not delete specified blog');
         }
     }
 }

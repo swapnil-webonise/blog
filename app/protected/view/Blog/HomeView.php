@@ -43,18 +43,32 @@
     </form>
 <table border="1" class='table'>
     <?php
+    if(Application::session()->read('userId')!==null){
+      $userRole=Application::session()->read('userRole');
+    }
+    else{
+        $userRole=3;
+    }
     foreach($this->blogs as $blog){
-    if($blog['isApprove']=='Yes'||$this->userRole===1){
+    if($blog['isApprove']=='Yes'){
     ?>
     <tr><td><table border="1" style="width: 250px;">
                 <tr><td>Title :</td><td><?php echo $blog['title'];?></td></tr>
                 <tr><td>Description:</td><td><?php echo substr(html_entity_decode($blog['description']),0,50).'...';?></td></tr>
                 <tr><td colspan=2 align='center'><a href=<?php echo '/specific/'.$blog['id']; ?>>read more..</a></td></tr>
             </table>
-            <?php
-
-            }
-            }
+    <?php
+    }
+    if($blog['isApprove']=='No'&& ($userRole==1||$userRole==2)){
+                ?>
+    <tr><td><table border="1" style="width: 250px;">
+                <tr><td>Title :</td><td><?php echo $blog['title'];?></td></tr>
+                <tr><td>Description:</td><td><?php echo substr(html_entity_decode($blog['description']),0,50).'...';?></td></tr>
+                <tr><td colspan=2 align='center'><a href=<?php echo '/specific/'.$blog['id']; ?>>read more..</a></td></tr>
+            </table>
+    <?php
+    }
+    }
             ?>
         </td></tr>
 </table>

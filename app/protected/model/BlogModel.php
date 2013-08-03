@@ -14,4 +14,14 @@ class BlogModel extends LibModel{
         $this->title=htmlentities($this->title);
         $this->description=htmlentities($this->description);
     }
+    public function delete($condition){
+        $data=$this->findByCondition($condition);
+        if(!empty($data)){
+            if($this->deleteData($condition)>0){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 }
