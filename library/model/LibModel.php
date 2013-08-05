@@ -75,7 +75,10 @@ class LibModel {
     public function deleteData($condition=null){
         $db=LibDatabase::getDbInstance();
         if(empty($condition)){
-            $condition=array($this->primaryKey,'=',$this->{$this->primaryKey});
+            if(isset($this->primaryKey))
+            {
+                $condition=array($this->primaryKey,'=',$this->{$this->primaryKey});
+            }
         }
         $cnt=$db->generateQuery('Delete',$this->tableName,null,$condition);
         if($cnt>0){
