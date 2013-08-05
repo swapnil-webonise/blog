@@ -34,6 +34,9 @@ class UserController extends LibController{
             $returnArray['array']['email_id']=$_POST['txtEmailId'];
             $returnArray['array']['password']=$_POST['txtPassword'];
             $returnArray['array']['user_role_id']=$_POST['comboUserRole'];
+            $userRoleObj=new UserRoleModel();
+            $userRoleArray=$userRoleObj->getAll();
+            $returnArray['array']['userRoleArray']=$userRoleArray;
             $this->render('Registration',$returnArray['array']);
         }
         elseif($returnArray['status']==='Success'){
