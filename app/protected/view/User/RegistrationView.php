@@ -42,12 +42,7 @@
                                 <option value="">Select</option>
                                 <?php
                                 foreach ($this->userRoleArray as $role) {
-                                    if($role['id']==$this->user_role_id){
-                                        echo '<option value="'.$role['id'].'">'.$role['user_role'].'</option>';
-                                    }
-                                    else{
-                                        echo '<option value="'.$role['id'].'" >'.$role['user_role'].'</option>';
-                                    }
+                                    echo '<option value="'.$role['id'].'" >'.$role['user_role'].'</option>';
                                 }
                                 ?>
                             </select>
