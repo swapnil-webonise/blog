@@ -29,7 +29,12 @@ class UserController extends LibController{
         $returnArray=$userObj->doRegister($data);
 
         if($returnArray['status']==='Error'){
-            $this->render('RegistrationError',$returnArray['array']);
+            $returnArray['array']['first_name']=$_POST['txtFname'];
+            $returnArray['array']['last_name']=$_POST['txtLname'];
+            $returnArray['array']['email_id']=$_POST['txtEmailId'];
+            $returnArray['array']['password']=$_POST['txtPassword'];
+            $returnArray['array']['user_role_id']=$_POST['comboUserRole'];
+            $this->render('Registration',$returnArray['array']);
         }
         elseif($returnArray['status']==='Success'){
             $to      = $returnArray['array']['userData'][0]['email_id'];
@@ -56,7 +61,9 @@ class UserController extends LibController{
             echo 'remaining';
         }
         else{
-            $this->render('/LoginError',$returnArray);
+            $returnArray['email_id']=$_POST['txtEmailId'];
+            $returnArray['password']=$_POST['txtPassword'];
+            $this->render('/Login',$returnArray);
         }
     }
 
@@ -98,10 +105,11 @@ class UserController extends LibController{
 
             mail($to, $subject, $message, $headers);
 
-            echo "Check Email Id";
+            $this->render('/ForgotPasswordDone');
         }
         elseif($returnArray['status']==='Error'){
-            $this->render('/ForgotPasswordError',$returnArray['array']);
+            $returnArray['array']['email_id']=$_POST['txtEmailId'];
+            $this->render('/ForgotPassword',$returnArray['array']);
         }
         else{
             $this->render('/ForgotPasswordError',array('error_field'=>array('email_id'),'validation_errors'=>array('email_id'=>array('Email id does not exist'))));
@@ -122,7 +130,7 @@ class UserController extends LibController{
     }
 
     public function doChangePassword(){
-        $data=array('txtNewPassword'=>$_POST['txtNewPassword'],'txtConfirmPassword'=>$_POST['txtConfirmPassword'],'activationCode'=>$_POST['activationCode']);
+        $data=array('new_password'=>$_POST['txtNewPassword'],'confirm_password'=>$_POST['txtConfirmPassword'],'activationCode'=>$_POST['activationCode']);
 
         $userObj=new UserModel();
         $returnArray=$userObj->doChangePassword($data);
@@ -131,7 +139,9 @@ class UserController extends LibController{
             $this->render('/ChangePasswordDone');
         }
         elseif($returnArray['status']==='Error'){
-            $this->render('/ChangePasswordError',$returnArray['array']);
+            $returnArray['array']['new_password']=$_POST['txtNewPassword'];
+            $returnArray['array']['confirm_password']=$_POST['txtConfirmPassword'];
+            $this->render('/ChangePassword',$returnArray['array']);
         }
     }
 }

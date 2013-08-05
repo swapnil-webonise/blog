@@ -7,8 +7,10 @@
 <body>
     <div class="main">
         <?php $this->useTemplate('head')?>
-        <h3>Password Changed Successfully!!!</h3>
-        <a href="/user/loginForm">Login</a>
+            <div class="main">
+                <h3>Email Send Successfully!!!</h3>
+                Please check your spam folder if the email does not appear within a few minutes.
+            </div>
     </div>
 </body>
 </html>

@@ -23,6 +23,8 @@ class BlogController extends LibController{
         $blog_tag=new BlogtagModel();
         $blog->title=$_POST['title'];
         $blog->description=$_POST['desc'];
+        $blog->isApprove='No';
+        $blog->created_on=date('Y-m-d H:i:s');
         $blog->user_id=Application::session()->read('userId');
         $blog->encode();
         $valid=$blog->validate();
@@ -32,7 +34,9 @@ class BlogController extends LibController{
             $this->home();
         }
         else{
-        $this->render('NewBlogError',$valid);
+            $valid['blogTitle']=$_POST['title'];
+            $valid['desc']=$_POST['desc'];
+            $this->render('create',$valid);
         }
 
     }
@@ -79,14 +83,16 @@ class BlogController extends LibController{
             $this->redirect('/specific/'.$_POST['id']);
         }
         else{
-            $this->render('NewBlogError',$valid);
+            $valid['blogTitle']=$_POST['title'];
+            $valid['desc']=$_POST['desc'];
+            $this->render('edit',$valid);
         }
     }
     public function delete(){
         $blog=new BlogModel();
         if($blog->delete(array('id','=',$_GET['id']))==true){
             $blogs=$blog->getAll();
-            $this->rdirect('/home');
+            $this->redirect('/home');
         }
         else{
             throw new ApplicationException('Could not delete specified blog');

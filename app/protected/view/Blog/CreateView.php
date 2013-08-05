@@ -18,14 +18,18 @@
         </script>
     </head>
     <body>
-    <?php $this->useTemplate('head')?>
-    <form method="post" action='/Blog/createBlog'>
-    <table>
-        <tr><th>Title : </th> <td> <input type='TEXT' name='title'> </td></tr>
-        <tr><th>Description : </th><td> <textarea cols=25 rows=6 name='desc' id='desc'></textarea> </td></tr>
-        <tr><th>Tags : </th> <td> <input type='TEXT' name='tag'> </td></tr>
-        <tr><td></td><td><input type="submit" name='submit' value="Create"></td> </tr>
-    </table>
-    </form>
+    <div class="main">
+        <?php $this->useTemplate('head')?>
+        <form method="post" action='/Blog/createBlog'>
+        <table>
+            <tr><th>Title : </th> <td> <input type='TEXT' name='title' value='<?php if(isset($this->blogTitle)){ echo $this->blogTitle;}?>'>
+                <span class="error"><?php if(in_array('title',$this->error_field)){echo $this->validation_errors['title'][0];}?></span>
+            </td></tr>
+            <tr><th>Description : </th><td> <textarea cols=25 rows=6 name='desc' id='desc'><?php if(isset($this->description)){ echo $this->description;}?></textarea><span class="error"><?php if(in_array('description',$this->error_field)){echo $this->validation_errors['description'][0];}?></span> </td></tr>
+            <tr><th>Tags : </th> <td> <input type='TEXT' name='tag'> </td></tr>
+            <tr><td></td><td><input type="submit" name='submit' value="Create"></td> </tr>
+        </table>
+        </form>
+    </div>
     </body>
 </html>

@@ -1,4 +1,6 @@
 <br>
+<div class="menubar">
+    <div><img src="../../../global/img/Blog_Icon.gif" height="40px" width="40px">&nbsp;&nbsp;&nbsp;<span style="font-weight: bolder;font-size:xx-large; color: #2879BD;padding-right: 100px ">Blog System</span>
 <a href="/" class="menu">Home</a>
 <?php
 Application::session()->start();
@@ -16,5 +18,7 @@ else{
 <?php
 }
 ?>
+    </div   >
+</div>
 <br>
 <br>

@@ -126,28 +126,28 @@ class LibValidation{
         $this->isvalid=false;
         switch($rule){
             case 'require':
-                $this->validation_errors["$field"][]="value of $field should not be empty";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should not be empty";
                 break;
             case 'min':
-                $this->validation_errors["$field"][]="value of $field should have minimum $param characters/digits";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should have minimum $param characters/digits";
                 break;
             case 'max':
-                $this->validation_errors["$field"][]="value of $field should have maximum $param characters/digits";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should have maximum $param characters/digits";
                 break;
             case 'alpha':
-                $this->validation_errors["$field"][]="value of $field should contain only alphabets";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should contain only alphabets";
                 break;
             case 'alphanumeric':
-                $this->validation_errors["$field"][]="value of $field should be alphanumeric";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should be alphanumeric";
                 break;
             case 'email':
-                $this->validation_errors["$field"][]="value of $field is not valid email";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." is not valid email";
                 break;
             case 'special':
-                $this->validation_errors["$field"][]="value of $field should contain at least one special character";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should contain at least one special character";
                 break;
             case 'numeric':
-                $this->validation_errors["$field"][]="value of $field should contain only numeric values";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should contain only numeric values";
                 break;
             default:
                 $this->validation_errors['other'][]="$rule is not defined in library";

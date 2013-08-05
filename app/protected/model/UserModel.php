@@ -123,7 +123,7 @@ class UserModel extends LibModel{
     }
 
     public function doChangePassword($data){
-        $rules=array('txtNewPassword'=>array('require'),'txtConfirmPassword'=>array('require'),'activationCode'=>array('require'));
+        $rules=array('new_password'=>array('require'),'confirm_password'=>array('require'),'activationCode'=>array('require'));
         $loginValidate=new LibValidation($data,$rules);
 
         $returnArray=array();

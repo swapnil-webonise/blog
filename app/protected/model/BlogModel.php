@@ -11,7 +11,7 @@ class BlogModel extends LibModel{
         return($this->findAll());
     }
     public function encode(){
-        $this->title=htmlentities($this->title);
+        $this->title=htmlentities($this->title,ENT_QUOTES);
         $this->description=htmlentities($this->description);
     }
     public function delete($condition){
@@ -25,7 +25,7 @@ class BlogModel extends LibModel{
         return false;
     }
     public function validate(){
-        $data=array('title'=>$this->title,'description'=>$this->description,);
+        $data=array('title'=>$this->title,'description'=>$this->description);
         $conditions=array('title'=>'require','description'=>'require');
         $validation=new LibValidation($data,$conditions);
         if($validation->validate()==true){
