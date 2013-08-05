@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 05, 2013 at 10:27 AM
+-- Generation Time: Aug 05, 2013 at 04:41 PM
 -- Server version: 5.5.31
 -- PHP Version: 5.3.10-1ubuntu3.6
 
@@ -30,20 +30,23 @@ CREATE TABLE IF NOT EXISTS `blog` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `description` text NOT NULL,
-  `isApprove` enum('Yes','No') NOT NULL,
+  `isApprove` enum('Yes','No') NOT NULL DEFAULT 'No',
   `user_id` int(10) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `modified_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `FK_blog_user` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `blog`
 --
 
-INSERT INTO `blog` (`id`, `title`, `description`, `isApprove`, `user_id`) VALUES
-(5, 'Geek hours', 'It is energetic&lt;br&gt;', 'Yes', 22),
-(6, 'Technical', 'Hi this peter i am talking jquery&lt;br&gt;', 'Yes', 22),
-(7, 'Java', 'It is a string&lt;br&gt;', 'Yes', 22);
+INSERT INTO `blog` (`id`, `title`, `description`, `isApprove`, `user_id`, `created_on`, `modified_on`) VALUES
+(5, 'Geek', 'It is energetic&lt;br&gt;', 'Yes', 22, '2013-08-05 14:20:15', '2013-08-05 08:59:17'),
+(6, 'Technical', 'Hi this peter i am talking jquery&lt;br&gt;', 'Yes', 22, '2013-08-05 14:20:15', '2013-08-05 08:50:15'),
+(7, 'Java', 'It is a string&lt;br&gt;', 'Yes', 22, '2013-08-05 14:20:15', '2013-08-05 08:50:15'),
+(15, 'My Blog', 'It is blog&lt;br&gt;', 'Yes', 22, '2013-08-05 15:25:12', '2013-08-05 09:55:35');
 
 -- --------------------------------------------------------
 
@@ -57,7 +60,14 @@ CREATE TABLE IF NOT EXISTS `blogtag` (
   `blog_id` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_blogtag_blog` (`blog_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `blogtag`
+--
+
+INSERT INTO `blogtag` (`id`, `tag_name`, `blog_id`) VALUES
+(8, 'My', 15);
 
 -- --------------------------------------------------------
 
@@ -74,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `FK_comment_blog` (`blog_id`),
   KEY `FK_comment_user` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `comment`
@@ -82,7 +92,8 @@ CREATE TABLE IF NOT EXISTS `comment` (
 
 INSERT INTO `comment` (`id`, `comment`, `isApprove`, `blog_id`, `user_id`) VALUES
 (1, 'dsfr', 'Yes', 5, 22),
-(2, 'sdf', 'No', 5, 22);
+(2, 'sdf', 'No', 5, 22),
+(4, 'Hi this nitest\r\n', 'Yes', 5, 22);
 
 -- --------------------------------------------------------
 
@@ -104,14 +115,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_id` (`email_id`),
   KEY `FK_user_userrole` (`user_role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `email_id`, `password`, `random_no`, `activation_code`, `gender`, `user_role_id`, `isActivated`) VALUES
-(22, 'swapnil', 'patil', 'swapnil.patil@weboniselab.com', 'b9988616c86c4b16274819f03e3dbd02', '45033495', '48117311', 'Male', 1, 'Yes');
+(22, 'swapnil', 'patil', 'swapnil.patil@weboniselab.com', 'b9988616c86c4b16274819f03e3dbd02', '45033495', '48117311', 'Male', 1, 'Yes'),
+(23, 'Priyanka', 'Bhoir', 'priyanka.bhoir@weboniselab.com', '0af1c4460c6b0c5ddbac32539bcdc449', '26011482', '10091459', 'Female', 2, 'Yes'),
+(24, 'swapnil', 'patil', 'swapnil@yopmail.com', '7fa23a0144936688ff2031ee1326b89c', '13221185', '21615219', 'Male', 3, 'Yes');
 
 -- --------------------------------------------------------
 
