@@ -30,40 +30,56 @@
                             <?php }
                                    else {
                         ?>
-                        <div><b>Status : </b>Not Approved</div>
+                        <div><b>Status : </b>Approved</div>
                                    <?php }?>
                         <div><a href=<?php echo '/blog/edit/'.$blog['id'];?>>Edit</a></div>
                         <div><a href=<?php echo '/blog/delete/'.$blog['id']; ?>>Delete</a></div>
                     <? }
-                    elseif($userRole==2){?>
+                    elseif($userRole==2){
+                        if($blog['isApprove']=='No'){?>
                         <div><a href=<?php echo '/blog/approve/'.$blog['id'];?>>Approve</a></div>
                     <?php }
-                    else{?>
+                    }
+                    else{
+                        if($blog['isApprove']=='No'){?>
                         <div><b>Status : </b>Not Approved</div>
-                    <?php } ?>
+                    <?php }
+                        else{
+                            echo '<div><b>Status : </b>Approved</div>';
+                        }
+                    }?>
 
             <div class="blogTitle"><b>Title : </b><?php echo ucfirst($blog['title']);?></div>
             <div class="blogDescription"><b>Description : </b><?php echo html_entity_decode($blog['description']);?></div>
             <table>
                 <tr><td></td><td><b>Comments:</b>
-                    <table style="width: 500px;">
+                    <table style="width: 500px;background-color: #f5deb3;">
                         <?php foreach($this->comments as $comment){?>
                         <tr>
+                            <?php if($comment['isApprove']=='Yes'){?>
                             <td><?php echo ucfirst($comment['first_name'].' '.$comment['last_name']).' : <br>'.$comment['comment']?></td>
-                        <td>is Approved:<?php echo $comment['isApprove'];
-                            if($userRole==1){?>
-                                <a href=<?php echo '/comment/approve/'.$comment['id']; ?>>Approve</a></td>
+                            <td>is Approved:<?php echo $comment['isApprove'];?>
+                            <?php }
+                                
+                                if($userRole==1){
+                                if($comment['isApprove']=='No'){?>
+                                <a href=<?php echo '/comment/approve/'.$comment['id']; ?>>Approve</a></td><?php } ?>
                                     <td><a href=<?php echo '/comment/edit/'.$comment['id']; ?>>edit</a></td>
                                 <td><a href=<?php echo '/comment/delete/'.$comment['id']; ?>>delete</a></td>
                                 <?php } ?>
                         </tr>
-                        <?php } ?>
+                        <?php }
+                        if(Application::session()->read('userId')!==null){
+                        ?>
                         <tr><td colspan="4"><form action="/Comment/add" method="post">
                             <textarea name='comment' rows="3" cols="30"></textarea>
                             <input type='hidden' name='blog_id' value='<?php echo $blog['id'];?>'>
                             <input type="submit" name="submit" value="comment">
                         </form></td>
                         </tr>
+                            <?php
+                        }
+?>
                     </table>
                 </td></tr>
             </table>
