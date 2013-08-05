@@ -12,7 +12,7 @@ class BlogModel extends LibModel{
     }
     public function encode(){
         $this->title=htmlentities($this->title,ENT_QUOTES);
-        $this->description=htmlentities($this->description);
+        $this->description=htmlentities($this->description,ENT_QUOTES);
     }
     public function delete($condition){
         $data=$this->findByCondition($condition);

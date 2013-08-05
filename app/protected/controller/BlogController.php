@@ -76,9 +76,9 @@ class BlogController extends LibController{
         $blog->id=$_POST['id'];
         $blog->title=$_POST['title'];
         $blog->description=$_POST['desc'];
-        $blog->encode();
         $valid=$blog->validate();
         if($valid===true){
+            $blog->encode();
             $blog->save();
             $this->redirect('/specific/'.$_POST['id']);
         }

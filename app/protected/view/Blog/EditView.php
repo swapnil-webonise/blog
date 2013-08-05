@@ -23,10 +23,12 @@
         <form method="post" action='/Blog/editBlog'>
             <table>
                 <tr><th></th> <td> <input type='hidden' name='id' value=<?php echo $this->blogs[0]['id']?>> </td></tr>
-                <tr><th>Title : </th> <td> <input type='TEXT' name='title' value='<?php if(isset($this->blogTitle)){ echo $this->blogTitle;}?>'>
+                <tr><th>Title : </th> <td> <input type='TEXT' name='title' value='<?php if(isset($this->blogTitle)){ echo $this->blogTitle;} else{
+                    echo $this->blogs[0]['title'];
+                }?>'>
                     <span class="error"><?php if(in_array('title',$this->error_field)){echo $this->validation_errors['title'][0];}?></span>
                 </td></tr>
-                <tr><th>Description : </th><td> <textarea cols=25 rows=6 name='desc' id='desc'><?php echo $this->blogs[0]['description']?><?php if(isset($this->description)){ echo $this->description;}?></textarea><span class="error"><?php if(in_array('description',$this->error_field)){echo $this->validation_errors['description'][0];}?></span> </td></tr>
+                <tr><th>Description : </th><td> <textarea cols=25 rows=6 name='desc' id='desc'><?php echo $this->blogs[0]['description']?><?php if(isset($this->desc)){ echo $this->desc;}?></textarea><span class="error"><?php if(in_array('description',$this->error_field)){echo $this->validation_errors['description'][0];}?></span> </td></tr>
                 <tr><td></td><td><input type="submit" name='submit' value="Edit"></td> </tr>
             </table>
         </form>
