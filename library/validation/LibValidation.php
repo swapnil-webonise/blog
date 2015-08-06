@@ -41,7 +41,7 @@ class LibValidation{
 
     public function validate(){
         $this->isvalid=true;
-        foreach($this->_ata as $field=>$value){
+        foreach($this->data as $field=>$value){
             $rule_for_field=$this->get_rule($field);
             if(is_array($rule_for_field)){
                 foreach($rule_for_field as $key=>$rule){
@@ -57,7 +57,7 @@ class LibValidation{
             }
 
         }
-        return $this->_isvalid;
+        return $this->isvalid;
     }
 
     private function get_rule($field){
@@ -123,31 +123,31 @@ class LibValidation{
      * keep all error in one array so that user will able to use them
      */
     private function addError($field,$param,$rule){
-        $this->_isvalid=false;
+        $this->isvalid=false;
         switch($rule){
             case 'require':
-                $this->validation_errors["$field"][]="value of $field ({$this->data[$field]}) should not be empty";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should not be empty";
                 break;
             case 'min':
-                $this->validation_errors["$field"][]="value of $field ({$this->data[$field]}) should have minimum $param characters/digits";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should have minimum $param characters/digits";
                 break;
             case 'max':
-                $this->validation_errors["$field"][]="value of $field ({$this->data[$field]}) should have maximum $param characters/digits";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should have maximum $param characters/digits";
                 break;
             case 'alpha':
-                $this->validation_errors["$field"][]="value of $field ({$this->data[$field]}) should contain only alphabets";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should contain only alphabets";
                 break;
             case 'alphanumeric':
-                $this->validation_errors["$field"][]="value of $field ({$this->data[$field]}) should be alphanumeric";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should be alphanumeric";
                 break;
             case 'email':
-                $this->validation_errors["$field"][]="value of $field ({$this->data[$field]}) is not valid email";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." is not valid email";
                 break;
             case 'special':
-                $this->validation_errors["$field"][]="value of $field ({$this->data[$field]}) should contain at least one special character";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should contain at least one special character";
                 break;
             case 'numeric':
-                $this->validation_errors["$field"][]="value of $field ({$this->data[$field]}) should contain only numeric values";
+                $this->validation_errors["$field"][]="Value of ".ucfirst(str_replace('_',' ',$field))." should contain only numeric values";
                 break;
             default:
                 $this->validation_errors['other'][]="$rule is not defined in library";
@@ -207,7 +207,7 @@ class LibValidation{
      * validate the field is alphanumeric or not
      */
     private function validateAlphanumeric($value,$param){
-        if(1 === preg_match('/^[a-zA-Z0-9]+$/',$value)){
+        if(1 === preg_match('/[a-zA-Z]+/',$value)&&1 === preg_match('/[0-9]+/',$value)){
             return true;
         }
         return false;

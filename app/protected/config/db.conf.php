@@ -19,11 +19,18 @@
  * array('HOST'=>'localhost', 'DATABASE'=>'database', 'USER'=>'root', 'PASSWORD'=>'1234', 'DB_DRIVER'=>'mysql',  'PERSISTENT_CONNECTION'=>true, 'COLLATE'=>'utf8_unicode_ci', 'CHARSET'=>'utf8');
  */
 
-if($config['APP_MODE']=='dev'){
-    $dbconfig = array('HOST'=>'localhost', 'DATABASE'=>'blog_system', 'USER'=>'root', 'PASSWORD'=>'root', 'DB_DRIVER'=>'mysql',  'PERSISTENT_CONNECTION'=>true);
+if(isset($config['APP_MODE'])){
+    if($config['APP_MODE']=='dev'){
+        $db_config = array('HOST'=>'localhost', 'DATABASE'=>'blog_system', 'USER'=>'root', 'PASSWORD'=>'root', 'DB_DRIVER'=>'mysql',  'PERSISTENT_CONNECTION'=>true);
+    }
+    else if($config['APP_MODE']=='prod'){
+        $db_config = array('HOST'=>'localhost', 'DATABASE'=>'database', 'USER'=>'root', 'PASSWORD'=>'1234', 'DB_DRIVER'=>'mysql',  'PERSISTENT_CONNECTION'=>true);
+    }
+    else{
+        die('Error:Wrong APP_MODE defined');
+    }
 }
-else if($config['APP_MODE']=='prod'){
-    $dbconfig = array('HOST'=>'localhost', 'DATABASE'=>'database', 'USER'=>'root', 'PASSWORD'=>'1234', 'DB_DRIVER'=>'mysql',  'PERSISTENT_CONNECTION'=>true);
+else{
+    die('Error:Configure APP_MODE in common.conf.php');
 }
-
 ?>

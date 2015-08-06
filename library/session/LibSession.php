@@ -165,13 +165,7 @@ class LibSession{
         try{
             if($this->is_enable){
                 if($variable_name!==''){
-                    if(isset($_SESSION[$variable_name])){
-                        return $_SESSION[$variable_name];
-                    }
-                    else{
-                        $parent=debug_backtrace();
-                        throw new ApplicationException('Session variable not set',$parent[0]['file'],$parent[0]['line']);
-                    }
+                    return $_SESSION[$variable_name];
                 }
                 else{
                     $parent=debug_backtrace();
@@ -201,5 +195,10 @@ class LibSession{
         catch(Exception $e){
 
         }
+    }
+
+    public function __destruct(){
+        $this->is_enable=false;
+        $this->session_id=null;
     }
 }

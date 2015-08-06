@@ -160,6 +160,7 @@ class Application{
         }
         self::$_conf=null;
         self::$_db=null;
+        self::$_session=null;
         self::$app_type='';
         self::$route=array();
         if(isset(self::$error)){
